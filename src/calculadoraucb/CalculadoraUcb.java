@@ -29,10 +29,8 @@ public class CalculadoraUcb {
                 numero1 = sc.nextLine();
                 if (numero1.matches("[+-]?[\\d]*[.]?[\\d]+")) {
                     continuar = true;
-                } else {
-                    continuar = false;
-                }
-            } while (continuar != true);
+                } 
+            } while (!continuar);
             double nume1 = Double.parseDouble(numero1);
             double n1 = new Double(numero1);
             do {
@@ -41,13 +39,7 @@ public class CalculadoraUcb {
                         + " x = multiplicar \n / = dividir \n * = elevar primer número al segundo numero."
                         + "\n % = residuo");
                 operacion = sc.nextLine();
-                if (operacion.equals("+") || operacion.equals("-") || operacion.equals("x")
-                        || operacion.equals("X") || operacion.equals("/") || operacion.equals("%")
-                        || operacion.equals("*")) {
-                    comprobar = true;
-                } else {
-                    comprobar = false;
-                }
+                comprobar = ValidarOperacionExistente(operacion);
             } while (comprobar != true);
             String numero2;
             continuar = false;
@@ -56,10 +48,8 @@ public class CalculadoraUcb {
                 numero2 = sc.nextLine();
                 if (numero2.matches("[+-]?[\\d]*[.]?[\\d]+")) {
                     continuar = true;
-                } else {
-                    continuar = false;
-                }
-            } while (continuar != true);
+                } 
+            } while (!continuar);
             double nume2 = Double.parseDouble(numero2);
             double n2 = new Double(numero2);
             do {
@@ -84,10 +74,8 @@ public class CalculadoraUcb {
                                 numero2 = sc.nextLine();
                                 if (numero2.matches("[+-]?[\\d]*[.]?[\\d]+")) {
                                     continuar = true;
-                                } else {
-                                    continuar = false;
                                 }
-                            } while (continuar != true);
+                            } while (!continuar);
                             nume2 = Double.parseDouble(numero2);
                             n2 = new Double(numero2);
                         }
@@ -114,27 +102,40 @@ public class CalculadoraUcb {
                         res = n1 % n2;
                         break;
                 }
-            } while (comprobar != true);
+            } while (!comprobar);
 
             System.out.println("(" + numero1 + ") " + operacion + " (" + numero2 + ")" + " = " + res);
             System.out.println("\n ¿Desea hacer alguna otra operación? \n");
             System.out.println(" [s/n]");
             do {
-                comprobar = true;
                 operacion = sc.nextLine();
-
-                switch (operacion) {
-                    case "s":
-                    case "S":
-                    case "n":
-                    case "N":
-                        break;
-                    default:
-                        System.err.println("\n Error, ponga un literal valido. \n");
-                        comprobar = false;
+                comprobar = ValidarRespuestaRealizarOtraOP(operacion);
+            } while (!comprobar);
+        } while (Es_S_la_res(operacion));
+    }
+    private boolean Es_S_la_res(String operacion) {
+        return operacion.equals("s") || operacion.equals("S");   
+    }
+    private boolean ValidarOperacionExistente(String operacion) {
+        boolean comprobar = false;
+        if (operacion.equals("+") || operacion.equals("-") || operacion.equals("x")
+                        || operacion.equals("X") || operacion.equals("/") || operacion.equals("%")
+                        || operacion.equals("*")) {
+                    comprobar = true;
                 }
-            } while (comprobar != true);
-        } while (operacion.equals("s") || operacion.equals("S"));
     }
 
+    private boolean ValidarRespuestaRealizarOtraOP(String operacion) {
+        boolean comprobar = true;
+            switch (operacion) {
+                case "s":
+                case "S":
+                case "n":
+                case "N":
+                    break;
+                default:
+                    System.err.println("\n Error, ponga un literal valido. \n");
+                    comprobar = false;
+            }
+    }
 }

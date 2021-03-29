@@ -1,0 +1,5 @@
+1.-linea 32 que tiene un if extra de lo que debria ya que ya lo implementa el boolean como false Boolean assignments
+2.-linea 33 hice que sea un !continuar en vez de continuar != true Positive conditionals y asi en todos los whiles
+3.-linea 42 lo puse todo en una funcion para que se pueda entender mas rapido Complex conditionals
+4.-linea 51 se borro la el else del if ya que esta variable ya era definida como false y esto era medio redundante e innecesario
+5.-linea 115 mas o menos igual se realizo una funcion pero del switch que estaba implementado para que sea mas limpo 
